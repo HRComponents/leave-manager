@@ -1,0 +1,184 @@
+<?php $this->headTitle('Faculty Profile'); ?>
+
+<div class="content-header">
+    <h1>
+      Faculty Profile
+      <small>Hello, Faculty</small>
+    </h1>
+    <ol class="breadcrumb">
+      <li><a href="<?php echo $this->url('home'); ?>"><i class="fa fa-dashboard"></i> Home</a></li>
+      <li><a href="<?php echo $this->url('faculty'); ?>"><i class="fa fa-student"></i> Faculty</a></li>
+      <li class="active"><i class="fa fa-user-secret"></i> Profile</li>
+    </ol>
+</div>
+<section class="content">
+    <div class="row">
+        <div class="col-md-3 col-sm-6 col-xs-12">
+          <div class="info-box bg-aqua">
+            <span class="info-box-icon"><i class="fa fa-bookmark-o"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text">Bookmarks</span>
+              <span class="info-box-number">41,410</span>
+
+              <div class="progress">
+                <div class="progress-bar" style="width: 70%"></div>
+              </div>
+                  <span class="progress-description">
+                    70% Increase in 30 Days
+                  </span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+        <div class="col-md-3 col-sm-6 col-xs-12">
+          <div class="info-box bg-green">
+            <span class="info-box-icon"><i class="fa fa-thumbs-o-up"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text">Likes</span>
+              <span class="info-box-number">41,410</span>
+
+              <div class="progress">
+                <div class="progress-bar" style="width: 70%"></div>
+              </div>
+                  <span class="progress-description">
+                    70% Increase in 30 Days
+                  </span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+        <div class="col-md-3 col-sm-6 col-xs-12">
+          <div class="info-box bg-yellow">
+            <span class="info-box-icon"><i class="fa fa-calendar"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text">Events</span>
+              <span class="info-box-number">41,410</span>
+
+              <div class="progress">
+                <div class="progress-bar" style="width: 70%"></div>
+              </div>
+                  <span class="progress-description">
+                    70% Increase in 30 Days
+                  </span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+        <div class="col-md-3 col-sm-6 col-xs-12">
+          <div class="info-box bg-red">
+            <span class="info-box-icon"><i class="fa fa-comments-o"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text">Comments</span>
+              <span class="info-box-number">41,410</span>
+
+              <div class="progress">
+                <div class="progress-bar" style="width: 70%"></div>
+              </div>
+                  <span class="progress-description">
+                    70% Increase in 30 Days
+                  </span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+      </div>
+        <div id="accordion">
+            <h1>
+                <button class="btn btn-app pull-right" data-toggle="tooltip" data-placement="top" title="Enroll">
+                    <i class="fa fa-user-plus"></i>                    
+                </button>
+            </h1>
+            <div>
+              <div id="tabs">
+                <ul>
+                  <li><a href="#tabs-1">Tesda Course</a></li>                  
+                </ul>
+                <div id="tabs-1">
+                  <p>Phasellus ipsum. Nunc tristique tempus lectus.</p>
+                </div>                           
+              </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    <div class="clearfix"></div>
+    <div class="divider"><br></div>
+    <div class="box">
+        <div class="box-header">
+          <h3 class="box-title">Data Table With Full Features</h3>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+          <table id="example1" class="table table-bordered table-striped">
+            <thead>
+            <tr>
+              <th>Course Code</th>
+              <th>Descriptive Title</th>
+              <th>Description</th>
+              <th>Total Hours</th>
+              <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td>Trident</td>
+              <td>Internet
+                Explorer 4.0
+              </td>
+              <td>Win 95+</td>
+              <td> 4</td>
+              <td>X</td>
+            </tr>
+            <tr>
+              <td>Trident</td>
+              <td>Internet
+                Explorer 5.0
+              </td>
+              <td>Win 95+</td>
+              <td>5</td>
+              <td>C</td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+              <th>Rendering engine</th>
+              <th>Browser</th>
+              <th>Platform(s)</th>
+              <th>Engine version</th>
+              <th>CSS grade</th>
+            </tr>
+            </tfoot>
+          </table>
+        </div>
+        <!-- /.box-body -->
+      </div>
+</section>
+
+<?php
+
+$this->inlineScript()->captureStart();
+echo <<<JS
+    $(function() {
+        $( "#accordion" ).accordion({
+            collapsible: true,
+            active: false
+        });
+    });
+
+    $(function() {
+        $( "#tabs" ).tabs();
+    });      
+JS;
+$this->inlineScript()->captureEnd();
+?>
