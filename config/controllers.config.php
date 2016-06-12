@@ -7,7 +7,7 @@
  */
 
 use Zend\ServiceManager\Factory\InvokableFactory;
-use Academiae\LeaveManager\Controller;
+use LeaveManager\Controller;
 
 return [
     'factories' => [
