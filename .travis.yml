@@ -6,8 +6,6 @@ matrix:
   fast_finish: true
   include:
     - php: 5.6
-      env:
-        - EXECUTE_CS_CHECK=true
     - php: 7
     - php: hhvm
   allow_failures:
@@ -21,7 +19,6 @@ install:
 
 script:
   - composer test
-  - if [[ $EXECUTE_CS_CHECK == 'true' ]]; then composer cs ; fi
 
 notifications:
   email: true

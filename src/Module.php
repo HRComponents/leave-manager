@@ -1,10 +1,9 @@
 <?php
 
-/*
+/**
  * The MIT License
  *
- * Copyright 2016 Coding Matters, Inc.
- * Author  Gab Amba <gamba@gabbydgab.com>
+ * Copyright (c) 2016, Coding Matters, Inc. (Gab Amba <gamba@gabbydgab.com>)
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -25,12 +24,59 @@
  * THE SOFTWARE.
  */
 
-namespace Academe\Leave;
+namespace LeaveManager;
+
+use LeaveManager\Options\ModuleOptions;
+use LeaveManager\ConfigProvider;
+use Zend\Mvc\ModuleRouteListener;
+use Zend\Mvc\MvcEvent;
 
 class Module
 {
-    public function __invoke()
+    private $config = [];
+
+    /**
+     * Return default configuration for zend-mvc applications.
+     */
+    public function getConfig()
     {
-        return include __DIR__ . '/../config/module.config.php';
+        $provider = new ConfigProvider();
+
+        $this->config = $provider->getTemplateConfig();
+        $this->config['middleware_pipeline']    = $provider->getMiddlewareConfig();
+        $this->config['service_manager']        = $provider->getDependencyConfig();
+        $this->config['router']['routes']       = $provider->getRouteConfig();
+        $this->config['navigation']             = $provider->getNavigationConfig();
+        $this->config['controllers']            = $provider->getControllerConfig();
+        $this->config['controller_plugins']     = $provider->getControllerPluginConfig();
+
+        // Overrides the default config to use Glob module config
+        return array_merge_recursive($this->config, $provider->getGlobConfig());
+    }
+
+    /**
+     * Autoload site settings for variables and layouts
+     *
+     * @param MvcEvent $event
+     */
+    public function onBootstrap(MvcEvent $event)
+    {
+        $eventManager = $event->getApplication()->getEventManager();
+
+        $eventManager->attach('dispatch', [$this, 'loadLeaveCreditVariables'], 10);
+
+        $listener = new ModuleRouteListener();
+        $listener->attach($eventManager);
+    }
+
+    public function loadLeaveCreditVariables(MvcEvent $event)
+    {
+        // Fetch configuration
+        $config     = $event->getApplication()->getServiceManager()->get("Config");
+        $options    = (array_key_exists('leave_credit_settings', $config)) ? $config['leave_credit_settings'] : [];
+        $variables  = new ModuleOptions($options);
+
+        // Set configuration
+        $event->getViewModel()->setVariables($variables->toArray());
     }
 }
